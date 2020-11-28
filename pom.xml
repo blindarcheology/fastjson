@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.alibaba</groupId>
     <artifactId>fastjson</artifactId>
-    <version>1.2.75_preview_01</version>
+    <version>1.2.75_preview_03</version>
 
     <packaging>jar</packaging>
     <name>fastjson</name>
@@ -14,7 +14,7 @@
     <inceptionYear>2012</inceptionYear>
 
     <properties>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <gpg.skip>true</gpg.skip>
         <javadoc.skip>true</javadoc.skip>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -142,6 +142,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
                 <configuration>
                     <includes>
                         <include>**/bvt/**/*.java</include>

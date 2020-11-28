@@ -132,7 +132,9 @@ public class JSONPath implements JSONAware {
         }
 
         Segment lastSegment = segments[segments.length - 1];
-        if (lastSegment instanceof TypeSegment || lastSegment instanceof FloorSegment) {
+        if (lastSegment instanceof TypeSegment
+                || lastSegment instanceof FloorSegment
+                || lastSegment instanceof MultiIndexSegment) {
             return eval(
                     parser.parse());
         }
@@ -167,6 +169,8 @@ public class JSONPath implements JSONAware {
                 } else if (nextSegment instanceof FilterSegment) {
                     eval = true;
                 } else if (segment instanceof WildCardSegment) {
+                    eval = true;
+                }else if(segment instanceof MultiIndexSegment){
                     eval = true;
                 } else {
                     eval = false;
@@ -1019,6 +1023,12 @@ public class JSONPath implements JSONAware {
                 }
 
                 if (acceptBracket && ch == ']') {
+                    if (isEOF()) {
+                        if (propertyName.equals("last")) {
+                            return new MultiIndexSegment(new int[]{-1});
+                        }
+                    }
+
                     next();
                     Filter filter = new NotNullSegement(propertyName, false);
                     while (ch == ' ') {
